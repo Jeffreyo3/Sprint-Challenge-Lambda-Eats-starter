@@ -1,4 +1,5 @@
 import React from "react";
+import pizzaImg from "../Assets/Pizza.jpg";
 
 export default function PizzaForm({
   formValue,
@@ -11,17 +12,9 @@ export default function PizzaForm({
 }) {
   return (
     <form className="formContainer" onSubmit={handleSubmit}>
-      <div className="title">
+      <div className="heading">
         <h2>Build Your Own Pizza</h2>
-      </div>
-      <div className="errors">
-        <p>{errorMessage.name}</p>
-        <p>{errorMessage.size}</p>
-        <p>{errorMessage.sauce}</p>
-        <p>{errorMessage.toppings}</p>
-        <p>{errorMessage.glutenFree}</p>
-        <p>{errorMessage.specialInstructions}</p>
-        <p>{errorMessage.quantity}</p>
+        <img src={pizzaImg} style={{ width: "50%" }} />
       </div>
       {/* Order Name */}
       <div className="section">
@@ -38,6 +31,7 @@ export default function PizzaForm({
             value={formValue.name}
           />
         </div>
+        <p className="err">{errorMessage.name}</p>
       </div>
       {/* Size */}
       <div className="section">
@@ -54,6 +48,7 @@ export default function PizzaForm({
             <option value="21">X-Large (21")</option>
           </select>
         </div>
+        <p className="err">{errorMessage.size}</p>
       </div>
       {/* Sauces */}
       <div className="section">
@@ -98,6 +93,7 @@ export default function PizzaForm({
           />
           <label htmlFor="alfredo">Spinach Alfredo</label>
         </div>
+        <p className="err">{errorMessage.sauce}</p>
       </div>
       {/* Toppings */}
       <div className="section">
@@ -221,8 +217,8 @@ export default function PizzaForm({
             <label htmlFor="extra-cheese">Extra Cheese</label>
           </div>
         </div>
+        <p className="err">{errorMessage.toppings}</p>
       </div>
-
       {/* Gluten Free */}
       <div className="section">
         <div className="label">
@@ -235,6 +231,7 @@ export default function PizzaForm({
             <span className="slider"></span>
           </label>
         </div>
+        <p className="err">{errorMessage.glutenFree}</p>
       </div>
       {/* Special Insructions */}
       <div className="section">
@@ -251,23 +248,27 @@ export default function PizzaForm({
             value={formValue.specialInstructions}
           />
         </div>
+        <p className="err">{errorMessage.specialInstructions}</p>
       </div>
+      {/* Quantity & Submit */}
+      <div className="foot">
+        <div className="submit">
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="0"
+            max="10"
+            value={formValue.quantity}
+            onChange={onChangeHandler}
+          />
 
-      <div className="submit">
-        <input
-          type="number"
-          id="quantity"
-          name="quantity"
-          min="0"
-          max="10"
-          value={formValue.quantity}
-          onChange={onChangeHandler}
-        />
-
-        <button disabled={disabled} className="subButton" name="button">
-          {/* Add to Order */}
-          Submit Order
-        </button>
+          <button disabled={disabled} className="subButton" name="button">
+            {/* Add to Order */}
+            Submit Order
+          </button>
+        </div>
+        <p className="err">{errorMessage.quantity}</p>
       </div>
     </form>
   );

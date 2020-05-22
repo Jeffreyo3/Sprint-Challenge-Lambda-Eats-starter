@@ -62,12 +62,13 @@ const App = () => {
   const arrChangeHandler = e => {
     const { checked, id } = e.target
     const name = "toppings"
-    validateSchema(name, id)
     if (checked) {
       setFormValue({ ...formValue, [name]: [...formValue[name], id] })
+      validateSchema(name, [...formValue[name], id])
     } else {
       const itemRemoved = formValue[name].filter(existing => existing !== id)
       setFormValue({ ...formValue, [name]: itemRemoved })
+      validateSchema(name, itemRemoved)
     }
   }
 
