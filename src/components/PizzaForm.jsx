@@ -2,24 +2,27 @@ import React from "react";
 
 export default function PizzaForm({
   formValue,
+  disabled,
+  errorMessage,
   onChangeHandler,
-  toggleGlutenFree,
-  toppingsChangeHandler,
+  toggleChangeHandler,
+  arrChangeHandler,
   handleSubmit,
 }) {
-  console.log(formValue);
   return (
     <form className="formContainer" onSubmit={handleSubmit}>
       <div className="title">
         <h2>Build Your Own Pizza</h2>
       </div>
-      {/* <div className="errors">
-              <p>{errorMessage.email}</p>
-              <p>{errorMessage.first_name}</p>
-              <p>{errorMessage.last_name}</p>
-              <p>{errorMessage.password}</p>
-              <p>{errorMessage.accept}</p>
-          </div> */}
+      <div className="errors">
+        <p>{errorMessage.name}</p>
+        <p>{errorMessage.size}</p>
+        <p>{errorMessage.sauce}</p>
+        <p>{errorMessage.toppings}</p>
+        <p>{errorMessage.glutenFree}</p>
+        <p>{errorMessage.specialInstructions}</p>
+        <p>{errorMessage.quantity}</p>
+      </div>
       {/* Order Name */}
       <div className="section">
         <div className="label">
@@ -108,7 +111,7 @@ export default function PizzaForm({
               type="checkbox"
               id="pepperoni"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="pepperoni">Pepperoni</label>
             <br />
@@ -116,7 +119,7 @@ export default function PizzaForm({
               type="checkbox"
               id="sausage"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="sausage">Sausage</label>
             <br />
@@ -124,7 +127,7 @@ export default function PizzaForm({
               type="checkbox"
               id="canadian-bacon"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="canadian-bacon">Canadian Bacon</label>
             <br />
@@ -132,7 +135,7 @@ export default function PizzaForm({
               type="checkbox"
               id="spicy-italian-sausage"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="spicy-italian-sausage">Spicy Italian Sausage</label>
             <br />
@@ -140,7 +143,7 @@ export default function PizzaForm({
               type="checkbox"
               id="grilled-chicken"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="grilled-chicken">Grilled Chicken</label>
             <br />
@@ -148,7 +151,7 @@ export default function PizzaForm({
               type="checkbox"
               id="onions"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="onions">Onions</label>
             <br />
@@ -156,7 +159,7 @@ export default function PizzaForm({
               type="checkbox"
               id="green-pepper"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="green-pepper">Green Pepper</label>
           </div>
@@ -165,7 +168,7 @@ export default function PizzaForm({
               type="checkbox"
               id="diced-tomatos"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="diced-tomatos">Diced Tomatos</label>
             <br />
@@ -173,7 +176,7 @@ export default function PizzaForm({
               type="checkbox"
               id="black-olives"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="black-olives">Black Olives</label>
             <br />
@@ -181,7 +184,7 @@ export default function PizzaForm({
               type="checkbox"
               id="roasted-garlic"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="roasted-garlic">Roasted Garlic</label>
             <br />
@@ -189,7 +192,7 @@ export default function PizzaForm({
               type="checkbox"
               id="artichoke-hearts"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="artichoke-hearts">Artichoke Hearts</label>
             <br />
@@ -197,7 +200,7 @@ export default function PizzaForm({
               type="checkbox"
               id="three-cheese"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="three-cheese">Three Cheese</label>
             <br />
@@ -205,7 +208,7 @@ export default function PizzaForm({
               type="checkbox"
               id="pineapple"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="pineapple">Pineapple</label>
             <br />
@@ -213,7 +216,7 @@ export default function PizzaForm({
               type="checkbox"
               id="extra-cheese"
               name="toppings"
-              onChange={toppingsChangeHandler}
+              onChange={arrChangeHandler}
             />
             <label htmlFor="extra-cheese">Extra Cheese</label>
           </div>
@@ -227,9 +230,9 @@ export default function PizzaForm({
           <i>Choose up to 1</i>
         </div>
         <div className="field">
-          <label class="switch">
-            <input type="checkbox" onClick={toggleGlutenFree} />
-            <span class="slider"></span>
+          <label className="switch">
+            <input type="checkbox" onClick={toggleChangeHandler} />
+            <span className="slider"></span>
           </label>
         </div>
       </div>
@@ -255,17 +258,13 @@ export default function PizzaForm({
           type="number"
           id="quantity"
           name="quantity"
-          min="1"
+          min="0"
           max="10"
           value={formValue.quantity}
           onChange={onChangeHandler}
         />
 
-        <button
-          // disabled={disabled}
-          className="subButton"
-          name="button"
-        >
+        <button disabled={disabled} className="subButton" name="button">
           {/* Add to Order */}
           Submit Order
         </button>

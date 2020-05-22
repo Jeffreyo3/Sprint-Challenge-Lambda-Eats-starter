@@ -6,7 +6,7 @@ const pizzaFormSchema = yup.object().shape({
     sauce: yup.string().trim().required("You must select a sauce"),
     toppings: yup.array().max(10),
     glutenFree: yup.boolean(),
-    specialInstructions: yup.string().trim,
+    specialInstructions: yup.string().trim(),
     quantity: yup.number().min(1).max(10).required("You must select a quantity")
 })
 
